@@ -9,7 +9,17 @@ index.html contains the main page. It uses a built-in script to build tabs conta
 
 ## Implementation
 
-All APIs are accessed directly on the client side using JavaScript, except for Twitter, whose API requires more sophisticated validation. The module twitter.js calls search_server.php. Users should obtain API keys from Twitter and fill them into api_tokens.php, which should be kept private.
+All APIs are accessed directly on the client side using jQuery's .ajax() and.getJSON() methods, except for Twitter, whose API requires more sophisticated validation. The module twitter.js calls search_server.php. Users should obtain API keys from Twitter and fill them into api_tokens.php, which should be kept private.
+
+Error handing is done by setting a 10-second timeout at the time .ajax() is called, with the timeout cleared by .ajax's success() method. 
+
+## Future work
+
+There are a few areas that are likely to change with future updates:
+- As of this release, there is a glitch in which Tweets are placed outside the <div> box established for the Tweet tab.
+- More APIs may be added
+- More detailed geolocation information may be added
+- Many NSFW images appear in the Eventbrite stream. I may search against a list of banned hashtags to prevent these from overwhelming the feed
 
 ## Citations
 
