@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+    <title>Local Social News</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="css/search_client.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/tweet.css" />
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/app.js"></script>
+    <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+    <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="twitter.js"></script>
+    <script type="text/javascript" src="scripts/eventbrite.js"></script>
+    <script type="text/javascript" src="scripts/yelp.js"></script>
+    <script type="text/javascript" src="scripts/instagram.js"></script>
+
+            
+    <script type="text/javascript">
+    //<![CDATA[
+    //based on tab tutorial accessed from http://www.elated.com/articles/javascript-tabs/
+
+    var tabLinks = new Array();
+    var contentDivs = new Array();
+
+    function init() {
+
+      // Grab the tab links and content divs from the page
+      var tabListItems = document.getElementById('tabs').childNodes;
+      for ( var i = 0; i < tabListItems.length; i++ ) {
+        if ( tabListItems[i].nodeName == "LI" ) {
+          var tabLink = getFirstChildWithTagName( tabListItems[i], 'A' );
+          var id = getHash( tabLink.getAttribute('href') );
+          tabLinks[id] = tabLink;
+          contentDivs[id] = document.getElementById( id );
+        }
+      }
+
+      // Assign onclick events to the tab links, and
+      // highlight the first tab
+      var i = 0;
+
+      for ( var id in tabLinks ) {
+        tabLinks[id].onclick = showTab;
+        tabLinks[id].onfocus = function() { this.blur() };
+        if ( i == 0 ) tabLinks[id].className = 'selected';
+        i++;
+      }
+
+      // Hide all content divs except the first
+      var i = 0;
+
+      for ( var id in contentDivs ) {
+        if ( i != 0 ) contentDivs[id].className = 'tabContent hide';
+        i++;
+      }
+    }
+
+    function showTab() {
+      var selectedId = getHash( this.getAttribute('href') );
+
+      // Highlight the selected tab, and dim all others.
+      // Also show the selected content div, and hide all others.
+      for ( var id in contentDivs ) {
+        if ( id == selectedId ) {
+          tabLinks[id].className = 'selected';
+          contentDivs[id].className = 'tabContent';
+        } else {
+          tabLinks[id].className = '';
+          contentDivs[id].className = 'tabContent hide';
+        }
+      }
+
+      // Stop the browser following the link
+      return false;
+    }
+
+    function getFirstChildWithTagName( element, tagName ) {
+      for ( var i = 0; i < element.childNodes.length; i++ ) {
+        if ( element.childNodes[i].nodeName == tagName ) return element.childNodes[i];
+      }
+    }
+
+    function getHash( url ) {
+      var hashPos = url.lastIndexOf ( '#' );
+      return url.substring( hashPos + 1 );
+    }
+
+    //]]>
+    </script>
+
+
+</head>
+
+<body onload="init()">
+	<div id="search_box">
+		<h1 id="greeting" class="greeting">What's New in Your City?</h1>
+		<input name="search_terms" autofocus="autofocus"/>
+		<button id="search_button">Search</button>
+	</div>
+
+	<ul id="tabs">
+  		<li><a href="#nytimesTab">New York Times</a></li>
+  		<li><a href="#redditTab">Reddit</a></li>
+  		<li><a href="#twitterTab">Twitter</a></li>
+  		<li><a href="#eventTab">Eventbrite</a></li>
+  		<li><a href="#wikiTab">Wikipedia</a></li>
+  		<li><a href="#yelpTab">Yelp</a></li>
+  		<li><a href="#instagramTab">Instagram</a></li>
+  		
+	</ul>
+
+	<div class="tabContent" id="nytimesTab">
+	  <h2 id="nytimes-header">New York Times</h2>
+	  <div>
+	  	<ul id="nytimes-content">Nothing to show yet -- enter a search term.</ul>
+	  </div>
+	</div>
+
+	<div class="tabContent" id="redditTab">
+	  <h2 id="reddit-header">Reddit</h2>
+	  <div>
+	    <ul id="reddit-content">Nothing to show yet -- enter a search term.</ul>
+	  </div>
+	</div>
+
+	<div class="tabContent" id="twitterTab">
+	  <h2 id="twitter-header">Twitter</h2>
+	  <div>
+	    <ul id="twitter-content">Nothing to show yet -- enter a search term.</ul>
+	  </div>
+	</div>
+
+	<div class="tabContent" id="eventTab">
+	  <h2 id="eventbrite-header">Eventbrite</h2>
+	  <div>
+	    <ul id="eventbrite-content">Nothing to show yet -- enter a search term.</ul>
+	  </div>
+	</div>
+
+	<div class="tabContent" id="wikiTab">
+	  <h2 id="wiki-header">Wikipedia</h2>
+	  <div>
+	    <ul id="wiki-content">Nothing to show yet -- enter a search term.</ul>
+	  </div>
+	</div>
+
+	<div class="tabContent" id="yelpTab">
+	  <h2 id="yelp-header">Yelp</h2>
+	  <div>
+	    <ul id="yelp-content">Nothing to show yet -- enter a search term.</ul>
+	  </div>
+	</div>
+
+	<div class="tabContent" id="instagramTab">
+	  <h2 id="instagram-header">Instagram</h2>
+	  <div>
+	    <ul id="instagram-content">Nothing to show yet -- enter a search term.</ul>
+	  </div>
+	</div>
+
+	
+
+</body>
+</html>
